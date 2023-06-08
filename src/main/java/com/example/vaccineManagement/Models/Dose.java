@@ -6,14 +6,16 @@ import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
+import jakarta.persistence.JoinColumn;
+import jakarta.persistence.OneToOne;
 import jakarta.persistence.Table;
 import org.hibernate.annotations.CreationTimestamp;
 
 import java.util.Date;
 
 @Entity
-@Table(name = "dose1")
-public class Dose1 {
+@Table(name = "dose")
+public class Dose {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -24,6 +26,18 @@ public class Dose1 {
 
     @CreationTimestamp
     private Date vaccinationDate;
+
+    @OneToOne
+    @JoinColumn
+    private User user;
+
+    public User getUser() {
+        return user;
+    }
+
+    public void setUser(User user) {
+        this.user = user;
+    }
 
     public int getId() {
         return id;

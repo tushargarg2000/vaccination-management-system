@@ -1,15 +1,6 @@
 package com.example.vaccineManagement.Models;
-
-
 import com.example.vaccineManagement.Enums.Gender;
-import jakarta.persistence.Column;
-import jakarta.persistence.Entity;
-import jakarta.persistence.EnumType;
-import jakarta.persistence.Enumerated;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.GenerationType;
-import jakarta.persistence.Id;
-import jakarta.persistence.Table;
+import jakarta.persistence.*;
 
 @Entity
 @Table(name = "users")
@@ -28,10 +19,20 @@ public class User {
     private String emailId;
 
     //@Enumerated(EnumType.STRING)
-    private String gender;
+    private Gender gender;
 
     private String mobileNo;
 
+    @OneToOne(mappedBy = "user",cascade = CascadeType.ALL)
+    private Dose dose;
+
+    public Dose getDose() {
+        return dose;
+    }
+
+    public void setDose(Dose dose) {
+        this.dose = dose;
+    }
 
     public int getUserId() {
         return userId;
@@ -65,13 +66,13 @@ public class User {
         this.emailId = emailId;
     }
 
-//    public Gender getGender() {
-//        return gender;
-//    }
-//
-//    public void setGender(Gender gender) {
-//        this.gender = gender;
-//    }
+    public Gender getGender() {
+        return gender;
+    }
+
+    public void setGender(Gender gender) {
+        this.gender = gender;
+    }
 
     public String getMobileNo() {
         return mobileNo;
