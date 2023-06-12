@@ -1,5 +1,6 @@
 package com.example.vaccineManagement.Services;
 
+import com.example.vaccineManagement.Dtos.RequestDtos.UpdateEmailDto;
 import com.example.vaccineManagement.Enums.Gender;
 import com.example.vaccineManagement.Models.Dose;
 import com.example.vaccineManagement.Models.User;
@@ -31,6 +32,23 @@ public class UserService
         Dose dose = user.getDose();
 
         return dose.getVaccinationDate();
+    }
+
+    public String updateEmail(UpdateEmailDto updateEmailDto){
+
+        int userId = updateEmailDto.getUserId();
+
+        User user = userRepository.findById(userId).get();
+
+        //Modify the entity with new parameters
+        user.setEmailId(updateEmailDto.getNewEmailId());
+        userRepository.save(user);
+        return "Old Email has been modified with new one "+updateEmailDto.getNewEmailId();
+    }
+
+    public User getUserByEmail(String email){
+        User user = userRepository.findByEmailId(email);
+        return user;
     }
 
 
