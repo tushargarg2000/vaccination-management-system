@@ -9,9 +9,11 @@ import java.util.Date;
 @Data
 public class AppointmentReqDto {
 
-    private int docId;
+    private Integer docId;
 
-    private int userId;
+    //int --> 0
+
+    private Integer userId;
 
     private Date appointmentDate;
 

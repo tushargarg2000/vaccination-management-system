@@ -30,7 +30,7 @@ public class AppointmentService {
 
     public String bookAppointment(AppointmentReqDto appointmentReqDto)throws DoctorNotFound, UserNotFound {
 
-        Optional<Doctor> doctorOptional = doctorRepository.findById(appointmentReqDto.getDocId());
+        Optional<Doctor> doctorOptional = doctorRepository.findById(appointmentReqDto.getDocId()); //null/0
         if(!doctorOptional.isPresent()){
             throw new DoctorNotFound("DoctorId not found");
         }

@@ -1,6 +1,7 @@
 package com.example.vaccineManagement.Models;
 
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
@@ -19,7 +20,7 @@ public class Dose {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private int id; //Primary Key
+    private Integer id; //Primary Key
 
     @Column(unique = true)
     private String doseId; //Unique
@@ -29,6 +30,7 @@ public class Dose {
 
     @OneToOne
     @JoinColumn
+    @JsonIgnore
     private User user;
 
     public User getUser() {
