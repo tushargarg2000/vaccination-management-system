@@ -1,6 +1,7 @@
 package com.example.vaccineManagement.Models;
 
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
@@ -30,6 +31,7 @@ public class Appointment {
     @JoinColumn
     private Doctor doctor;
 
+    @JsonIgnore
     @ManyToOne
     @JoinColumn
     private User user;

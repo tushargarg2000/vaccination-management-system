@@ -2,6 +2,7 @@ package com.example.vaccineManagement.Services;
 
 
 import com.example.vaccineManagement.Dtos.RequestDtos.AppointmentReqDto;
+import com.example.vaccineManagement.Enums.Gender;
 import com.example.vaccineManagement.Exceptions.DoctorNotFound;
 import com.example.vaccineManagement.Exceptions.UserNotFound;
 import com.example.vaccineManagement.Models.Appointment;
@@ -11,6 +12,8 @@ import com.example.vaccineManagement.Repository.AppointmentRepository;
 import com.example.vaccineManagement.Repository.DoctorRepository;
 import com.example.vaccineManagement.Repository.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.mail.SimpleMailMessage;
+import org.springframework.mail.javamail.JavaMailSender;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -27,6 +30,9 @@ public class AppointmentService {
 
     @Autowired
     private UserRepository userRepository;
+
+    @Autowired
+    private JavaMailSender emailSender;
 
     public String bookAppointment(AppointmentReqDto appointmentReqDto)throws DoctorNotFound, UserNotFound {
 
@@ -58,6 +64,30 @@ public class AppointmentService {
 
         doctorRepository.save(doctor);
         userRepository.save(user);
+
+        //Send an email to the sender
+
+        String body = " Hi ! "+user.getName()+"\n" +
+                "You have successfully booked an appointment on "+appointment.getAppointmentDate() + "at "+appointment.getAppointmentTime()+"\n"+
+                "You doctor is "+doctor.getName()+ "\n"+
+                "Please reach at "+doctor.getVaccinationCenter().getAddress()+"\n"
+                + "Mask is mandatory";
+
+
+        SimpleMailMessage mailMessage = new SimpleMailMessage();
+
+        mailMessage.setFrom("springacciojob@gmail.com");
+        mailMessage.setTo(user.getEmailId());
+        mailMessage.setSubject("Appointment Confirmed !!");
+        mailMessage.setText(body);
+
+        emailSender.send(mailMessage);
+
+
+        String enteredString
+
+                if(enteredString.equals(Gender.FEMALE)|| enteredString.equals(Gender.MALE))
+
 
 
         return "Appointment booked successfully";

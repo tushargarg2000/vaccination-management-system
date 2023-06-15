@@ -33,6 +33,7 @@ public class User {
     @OneToOne(mappedBy = "user",cascade = CascadeType.ALL)
     private Dose dose;
 
+    @JsonIgnore
    @OneToMany(mappedBy = "user",cascade = CascadeType.ALL)
     private List<Appointment> appointmentList = new ArrayList<>();
 }
